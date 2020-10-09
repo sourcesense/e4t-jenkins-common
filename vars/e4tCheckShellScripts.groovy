@@ -3,7 +3,7 @@ void call(String baseDir='.', String reportFileName='checkstyle-report.xml') {
         /bin/bash -c ' \\
             . /app/dep-bootstrap.sh ;\\
             dep include log2/shell-common 0.1.0-SNAPSHOT check ;\\
-            check_shell_script $baseDir $reportFileName ;\\
+            check_shell_scripts $baseDir $reportFileName ;\\
         '
     """)
 }

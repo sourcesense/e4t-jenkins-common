@@ -1,4 +1,6 @@
 void call() {
+    echo "Branch: ${BRANCH_NAME}"
+    echo "Project: ${PROJECT_NAME}"
     sh(script: '''
         /bin/bash -c ' \\
             . /app/dep-bootstrap.sh ;\\
