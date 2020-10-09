@@ -1,11 +1,9 @@
 void call() {
-    sh '''
-        #!/usr/bin/env bash
-        . /app/dep-bootstrap.sh init
-        . /app/dep-bootstrap.sh
-        depPackage=log2/shell-common
-        depVersion=0.1.0-SNAPSHOT
-        dep include $depPackage $depVersion log
-        log "ciao"
-    '''
+    sh(script: '''
+        /bin/bash -c ' \\
+            . /app/dep-bootstrap.sh ;\\
+            dep include log2/shell-common 0.1.0-SNAPSHOT projects ;\\
+            check_version ;\\
+        '
+    ''')
 }
