@@ -1,5 +1,5 @@
 void call() {
     checkout scm
-    echo "Current branch is: ${BRANCH_NAME}"
-    echo "Project name: ${PROJECT_NAME}"
+    echo "Branch: ${BRANCH_NAME}"
+    echo "Project: ${PROJECT_NAME}"
 }

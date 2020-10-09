@@ -1,5 +1,6 @@
 void call() {
     sh '''
+        #!/usr/bin/env bash
         . /app/dep-bootstrap.sh init
         . /app/dep-bootstrap.sh
         depPackage=log2/shell-common
