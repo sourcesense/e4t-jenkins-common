@@ -18,7 +18,7 @@ void call(String repoName, String localTag, String remoteHost) {
                 echo "skipping docker image deploy (branch=\$branch)" ;\\
                 ;;
         esac ;\\
-        if [ -z "\$remoteTag" ]; then \\
+        if [ -n "\$remoteTag" ]; then \\
             docker_push $repoName $localTag \$remoteTag $remoteHost ;\\
         fi ;\\
     """)
