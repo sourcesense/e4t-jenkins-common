@@ -1,6 +1,6 @@
 void call(String repoName, String localTag, String remoteHost) {
     e4tDepScript("""
-        dep include ${e4tDepSccript.shellCommon} projects ;\\
+        dep include ${e4tDepScript.shellCommon} projects ;\\
         branch=\$(git_branch) ;\\
         version=\$(project_version) ;\\
         case "\$branch" in \\
