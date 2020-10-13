@@ -6,3 +6,6 @@ void call(String script) {
         '
     """)
 }
+
+@groovy.transform.Field
+String shellCommon = 'log2/shell-common:0.1.0-SNAPSHOT'
