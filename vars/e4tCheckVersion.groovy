@@ -1,8 +1,8 @@
 void call() {
     echo "Branch: ${BRANCH_NAME}"
     echo "Project: ${PROJECT_NAME}"
-    e4tExecute("""
-        dep include \$DEP_SHELL_COMMON_PACKAGE \$DEP_SHELL_COMMON_VERSION projects ;\\
+    e4tDepScript("""
+        dep include ${e4tDepShellCommon.name} ${e4tDepShellCommon.version} projects ;\\
         check_version ;\\
     """)
 }

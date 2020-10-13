@@ -1,6 +1,6 @@
 void call(String baseDir='.', String reportFileName='checkstyle-report.xml') {
-    e4tExecute("""
-        dep include \$DEP_SHELL_COMMON_PACKAGE \$DEP_SHELL_COMMON_VERSION check ;\\
+    e4tDepScript("""
+        dep include ${e4tDepShellCommon.name} ${e4tDepShellCommon.version} check ;\\
         check_shell_scripts $baseDir $reportFileName ;\\
     """)
 }
