@@ -18,7 +18,7 @@ void call(String repoName, String localTag, String remoteHost) {
                 ;;
         esac ;\\
         if [ -n "\$remoteTag" ]; then \\
-            docker_push $repoName $localTag \$remoteTag $remoteHost ;\\
+            docker_push "$repoName" "$localTag" "\$remoteTag" "$remoteHost" ;\\
         fi ;\\
     """)
 }
