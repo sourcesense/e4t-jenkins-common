@@ -11,8 +11,7 @@ void call(String repoName, String localTag, String remoteHost) {
                 remoteTag="qa-\$version" ;\\
                 ;; \\
             develop) \\
-                commitId=\$(git_commit) ;\\
-                remoteTag="lab-\$version-\$commitId" ;\\
+                remoteTag="lab-\$version" ;\\
                 ;; \\
             *) \\
                 echo "skipping docker image deploy (branch=\$branch)" ;\\
