@@ -3,16 +3,15 @@ void call(String repoName, String localTag, String remoteHost) {
         dep include EcoMind/git-common versions ;\\
         dep include EcoMind/container-common containers ;\\
         branch=\$(git_branch) ;\\
-        version=\$(project_version) ;\\
         case "\$branch" in \\
             master) \\
-                remoteTag=\$version ;\\
+                remoteTag=$localTag ;\\
                 ;; \\
             *-rc*) \\
-                remoteTag="qa-\$version" ;\\
+                remoteTag="qa-$localTag" ;\\
                 ;; \\
             develop) \\
-                remoteTag="lab-\$version" ;\\
+                remoteTag="lab-$localTag" ;\\
                 ;; \\
             *) \\
                 echo "skipping docker image deploy (branch=\$branch)" ;\\
