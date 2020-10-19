@@ -8,10 +8,10 @@ void call(String repoName, String localTag, String remoteHost) {
                 remoteTag=$localTag ;\\
                 ;; \\
             *-rc*) \\
-                remoteTag="qa-$localTag" ;\\
+                remoteTag=qa-$localTag ;\\
                 ;; \\
             develop) \\
-                remoteTag="lab-$localTag" ;\\
+                remoteTag=lab-$localTag ;\\
                 ;; \\
             *) \\
                 echo "skipping docker image deploy (branch=\$branch)" ;\\
