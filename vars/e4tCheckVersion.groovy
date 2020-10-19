@@ -1,8 +1,8 @@
 void call() {
     echo "Branch: ${BRANCH_NAME}"
     echo "Project: ${PROJECT_NAME}"
-    e4tDepScript("""
-        dep include ${e4tDepScript.shellCommon} projects ;\\
+    e4tDepScript('''
+        dep include EcoMind/git-common versions ;\\
         check_version ;\\
-    """)
+    ''')
 }

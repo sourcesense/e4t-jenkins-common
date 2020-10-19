@@ -1,6 +1,7 @@
 void call(String repoName, String localTag, String remoteHost) {
     e4tDepScript("""
-        dep include ${e4tDepScript.shellCommon} projects ;\\
+        dep include EcoMind/git-common versions ;\\
+        dep include EcoMind/container-common containers ;\\
         branch=\$(git_branch) ;\\
         version=\$(project_version) ;\\
         case "\$branch" in \\
