@@ -4,10 +4,10 @@ void call(String repoName, String localTag, String remoteHost) {
         dep include EcoMind/container-common containers ;\\
         branch=\$(git_branch) ;\\
         case "\$branch" in \\
-            master) \\
+            master | main) \\
                 remoteTag=$localTag ;\\
                 ;; \\
-            *-rc*) \\
+            release/*) \\
                 remoteTag=qa-$localTag ;\\
                 ;; \\
             develop) \\
