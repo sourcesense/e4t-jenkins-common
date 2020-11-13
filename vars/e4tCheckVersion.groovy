@@ -1,8 +1,10 @@
-void call() {
+/* groovylint-disable MethodReturnTypeRequired, NoDef */
+
+def call() {
     echo "Branch: ${BRANCH_NAME}"
     echo "Project: ${PROJECT_NAME}"
-    e4tDepScript('''
+    e4tDepScriptWithResult('''
         dep include EcoMind/git-common versions ;\\
-        check_version ;\\
+        project_version ;\\
     ''')
 }

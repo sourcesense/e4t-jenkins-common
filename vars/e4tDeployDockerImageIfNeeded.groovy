@@ -1,4 +1,6 @@
-void call(String repoName, String localTag, String remoteHost) {
+/* groovylint-disable MethodReturnTypeRequired, NoDef */
+
+def call(String repoName, String localTag, String remoteHost) {
     e4tDepScript("""
         dep include EcoMind/git-common versions ;\\
         dep include EcoMind/container-common containers ;\\
