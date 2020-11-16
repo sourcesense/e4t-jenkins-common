@@ -9,7 +9,7 @@ def call(String repoName, String localTag, String remoteHost) {
             master | main) \\
                 remoteTag=$localTag ;\\
                 ;; \\
-            release/*) \\
+            release/* | hotfix/*) \\
                 remoteTag=qa-$localTag ;\\
                 ;; \\
             develop) \\
