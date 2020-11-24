@@ -11,7 +11,7 @@ def call(String repoName, String localTag, String remoteHost) {
                 ;; \\
             release/* | hotfix/*) \\
                 if [[ $localTag == *SNAPSHOT* ]]; then \\
-                    echo "skipping docker image deploy (branch=\$branch)" ;\\
+                    echo "skipping docker image deploy (version=$localTag)" ;\\
                 else \\
                     remoteTag=qa-$localTag ;\\
                 fi ;\\
