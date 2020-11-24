@@ -10,14 +10,18 @@ def call(String repoName, String localTag, String remoteHost) {
                 remoteTag=$localTag ;\\
                 ;; \\
             release/* | hotfix/*) \\
-                remoteTag=qa-$localTag ;\\
+                if [[ $localTag == *SNAPSHOT* ]]; then \\
+                    echo "skipping docker image deploy (branch=\$branch)" ;\\
+                else \\
+                    remoteTag=qa-$localTag ;\\
+                fi ;\\
                 ;; \\
             develop) \\
                 remoteTag=lab-$localTag ;\\
                 ;; \\
             *) \\
                 echo "skipping docker image deploy (branch=\$branch)" ;\\
-                ;;
+                ;; \\
         esac ;\\
         if [ -n "\$remoteTag" ]; then \\
             docker_push "$repoName" "$localTag" "\$remoteTag" "$remoteHost" ;\\
