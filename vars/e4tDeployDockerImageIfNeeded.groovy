@@ -19,6 +19,17 @@ def call(String repoName, String localTag, String remoteHost) {
             develop) \\
                 remoteTag=lab-$localTag ;\\
                 ;; \\
+            feature/*) \\
+                if [[ $localTag == *-ext-SNAPSHOT* ]]; then \\
+                    t0=$localTag
+                    t1=\${t0%-ext-SNAPSHOT*}
+                    t2=\${branch#feature/}
+                    t3=\${t0#*SNAPSHOT-}
+                    remoteTag="ext-\$t1-\$t2-SNAPSHOT-\$t3" ;\\
+                else \\
+                    echo "skipping docker image deploy (version=$localTag)" ;\\
+                fi ;\\
+                ;; \\
             *) \\
                 echo "skipping docker image deploy (branch=\$branch)" ;\\
                 ;; \\
