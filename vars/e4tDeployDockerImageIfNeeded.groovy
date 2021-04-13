@@ -5,27 +5,52 @@ def call(String repoName, String localTag, String remoteHost) {
         dep include EcoMind/git-common versions ;\\
         dep include EcoMind/container-common containers ;\\
         branch=\$(git_branch) ;\\
+        if [[ $localTag == *-EXP-SNAPSHOT* ]]; then \\
+            localTag=$localTag ;\\
+            version=\${localTag%-EXP-SNAPSHOT*} ;\\
+            commitId=\${localTag#*SNAPSHOT-} ;\\
+            shortCommitId=\${commitId:0:6} ;\\
+            timeStamp=\$(date '+%Y%m%d%H%M%S') ;\\
+        fi ;\\
         case "\$branch" in \\
             master | main) \\
-                remoteTag=$localTag ;\\
+                if [[ $localTag == *-EXP-SNAPSHOT* ]]; then \\
+                    remoteTag="\$branch-\$version-EXP-SNAPSHOT-\$shortCommitId-\$timeStamp" ;\\
+                else \\
+                    remoteTag=$localTag ;\\
+                fi ;\\
                 ;; \\
-            release/* | hotfix/*) \\
-                if [[ $localTag == *SNAPSHOT* ]]; then \\
+            release/*) \\
+                if [[ $localTag == *-EXP-SNAPSHOT* ]]; then \\
+                    release=\${branch#release/} ;\\
+                    remoteTag="release-\$release-\$version-EXP-SNAPSHOT-\$shortCommitId-\$timeStamp" ;\\
+                elif [[ $localTag == *SNAPSHOT* ]]; then \\
                     echo "skipping docker image deploy (version=$localTag)" ;\\
                 else \\
-                    remoteTag=qa-$localTag ;\\
+                    remoteTag=$localTag ;\\
+                fi ;\\
+                ;; \\
+            hotfix/*) \\
+                if [[ $localTag == *-EXP-SNAPSHOT* ]]; then \\
+                    hotfix=\${branch#hotfix/} ;\\
+                    remoteTag="hotfix-\$hotfix-\$version-EXP-SNAPSHOT-\$shortCommitId-\$timeStamp" ;\\
+                elif [[ $localTag == *SNAPSHOT* ]]; then \\
+                    echo "skipping docker image deploy (version=$localTag)" ;\\
+                else \\
+                    remoteTag=$localTag ;\\
                 fi ;\\
                 ;; \\
             develop) \\
-                remoteTag=lab-$localTag ;\\
+                version=\${localTag%-SNAPSHOT*} ;\\
+                commitId=\${localTag#*SNAPSHOT-} ;\\
+                shortCommitId=\${commitId:0:6} ;\\
+                timeStamp=\$(date '+%Y%m%d%H%M%S') ;\\
+                remoteTag="develop-\$version-SNAPSHOT-\$shortCommitId-\$timeStamp" ;\\
                 ;; \\
             feature/*) \\
-                if [[ $localTag == *-ext-SNAPSHOT* ]]; then \\
-                    t0=$localTag
-                    t1=\${t0%-ext-SNAPSHOT*}
-                    t2=\${branch#feature/}
-                    t3=\${t0#*SNAPSHOT-}
-                    remoteTag="ext-\$t1-\$t2-SNAPSHOT-\$t3" ;\\
+                if [[ $localTag == *-EXP-SNAPSHOT* ]]; then \\
+                    feature=\${branch#feature/} ;\\
+                    remoteTag="feature-\$feature-\$version-EXP-SNAPSHOT-\$shortCommitId-\$timeStamp" ;\\
                 else \\
                     echo "skipping docker image deploy (version=$localTag)" ;\\
                 fi ;\\
