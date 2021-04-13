@@ -41,6 +41,7 @@ def call(String repoName, String localTag, String remoteHost) {
                 fi ;\\
                 ;; \\
             develop) \\
+                localTag=$localTag ;\\
                 version=\${localTag%-SNAPSHOT*} ;\\
                 commitId=\${localTag#*SNAPSHOT-} ;\\
                 shortCommitId=\${commitId:0:6} ;\\
