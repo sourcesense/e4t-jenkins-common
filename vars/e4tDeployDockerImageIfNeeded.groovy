@@ -41,12 +41,16 @@ def call(String repoName, String localTag, String remoteHost) {
                 fi ;\\
                 ;; \\
             develop) \\
-                localTag=$localTag ;\\
-                version=\${localTag%-SNAPSHOT*} ;\\
-                commitId=\${localTag#*SNAPSHOT-} ;\\
-                shortCommitId=\${commitId:0:6} ;\\
-                timeStamp=\$(date '+%Y%m%d%H%M%S') ;\\
-                remoteTag="develop-\$version-SNAPSHOT-\$shortCommitId-\$timeStamp" ;\\
+                if [[ $localTag != *SNAPSHOT* ]]; then \\
+                    echo "wrong develop tag detected, skipping (version=$localTag)" ;\\
+                else \\
+                    localTag=$localTag ;\\
+                    version=\${localTag%-SNAPSHOT*} ;\\
+                    commitId=\${localTag#*SNAPSHOT-} ;\\
+                    shortCommitId=\${commitId:0:6} ;\\
+                    timeStamp=\$(date '+%Y%m%d%H%M%S') ;\\
+                    remoteTag="develop-\$version-SNAPSHOT-\$shortCommitId-\$timeStamp" ;\\
+                fi ;\\
                 ;; \\
             feature/*) \\
                 if [[ $localTag == *-EXP-SNAPSHOT* ]]; then \\
